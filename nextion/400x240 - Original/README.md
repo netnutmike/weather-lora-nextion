@@ -1,4 +1,4 @@
-# weather-tempest-nextion
+# weather-tempest-nextion 400 X 240 - Original
 
 # About
 
@@ -17,6 +17,15 @@ Mike Myers
 
 ## License
 FREE
+
+# Example Screens
+
+![Startup Screen](/nextion/400x200%20-%20Original/examples/main-example.png)
+![Temperature Screen](/nextion/400x200%20-%20Original/examples/temp-example.png)
+![Wind Screen](/nextion/400x200%20-%20Original/examples/wind-example.png)
+![Rain Screen](/nextion/400x200%20-%20Original/examples/rain-example.png)
+![Lightning Screen](/nextion/400x200%20-%20Original/examples/lightning-example.png)
+
 
 # Pages and Elements
 
