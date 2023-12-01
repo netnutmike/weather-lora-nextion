@@ -1,0 +1,16 @@
+{
+	"folders": [
+		{
+			"path": "."
+		},
+		{
+			"name": "Nextion Tests and Examples",
+			"path": "Nextion Tests and Examples"
+		},
+		{
+			"name": "Lora to Nextion Weather",
+			"path": "Lora to Nextion Weather"
+		}
+	],
+	"settings": {}
+}

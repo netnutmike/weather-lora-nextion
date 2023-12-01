@@ -20,12 +20,30 @@ FREE
 
 # Example Screens
 
-![Startup Screen](/nextion/400x200%20-%20Original/examples/main-example.png)
-![Temperature Screen](/nextion/400x200%20-%20Original/examples/temp-example.png)
-![Wind Screen](/nextion/400x200%20-%20Original/examples/wind-example.png)
-![Rain Screen](/nextion/400x200%20-%20Original/examples/rain-example.png)
-![Lightning Screen](/nextion/400x200%20-%20Original/examples/lightning-example.png)
+![Startup Screen](examples/main-example.png)
+![Temperature Screen](examples/temp-example.png)
+![Wind Screen](examples/wind-example.png)
+![Rain Screen](examples/rain-example.png)
+![Lightning Screen](examples/lightning-example.png)
 
+
+# Images
+
+0. Sunny (Background)
+1. Ascending Pressure Trend (blue background)
+2. Background with no conditions (background)
+3. Night Clear Sky (background)
+4. Cloudy (background)
+5. Heavy Rain (background)
+6. Background for all sub screens
+7. Partly Sunny (background)
+8. Raining (background)
+9. Stable Pressure Trend (blue background)
+10. Thunderstorm (Background)
+11. Wind screen background
+12. Small Compass Rose for wind direction guage on main screen
+13. Large Compass Rose for wind direction guage on wind screen
+14. Decending Pressure Trend (blue background)
 
 # Pages and Elements
 
@@ -34,49 +52,49 @@ Main startup page
 
 ### Elements
 
-#### z0 (Guage)
-#### t0 (Wind Direction and Speed)
-#### t1 (UV Index)
-#### t2 (Last Lightning Distance)
-#### t3 (Last Lightning Time)
-#### t4 (Rain Rate)
-#### t5 (Rain Today)
-#### t6 (Wind Gust)
-#### t7 (Rain Yesterday)
-#### t8 (Temperature)
-#### t9 (Humidity)
-#### t10 (Pressure)
-#### p0 (Pressure Trend Image)
+#### windDirection (Guage)
+#### windVal (Wind Direction and Speed)
+#### uvVal (UV Index)
+#### lastStrikeDist (Last Lightning Distance)
+#### lastStrikeTime (Last Lightning Time)
+#### rainRate (Rain Rate)
+#### rainToday (Rain Today)
+#### gustVal (Wind Gust)
+#### rainYesterday (Rain Yesterday)
+#### tempVal (Temperature)
+#### humidityVal (Humidity)
+#### pressureVal (Pressure)
+#### pressureTrend (Pressure Trend Image)
 
 ## temp
 
 ### Elements
 
-#### t4 (Pressure)
-#### t5 (UV)
-#### t6 (Humidity)
-#### t7 (Temp)
+#### pressureVal (Pressure)
+#### uvVal (UV)
+#### humidityVal (Humidity)
+#### tempVal (Temp)
 
 ## rain
 
 ### Elements
 
-#### t2 (Today Rain)
-#### t3 (Rain Rate)
+#### rainToday (Today Rain)
+#### rainRate (Rain Rate)
 
 ## lightning
 
 ### Elements
 
-#### t2 (Last Detection)
-#### t4 (Last Distance)
+#### lastStrikeTime (Last Detection)
+#### lastStrikeDist (Last Distance)
 
 
 ## wind
 
 ### Elements
 
-#### z0 (Guage)
-#### t0 (Wind Speed)
-#### t1 (Wind Direction Abreviation)
-#### t3 (Wind Gust)
+#### windDirection (Guage)
+#### windSpeed (Wind Speed)
+#### windDirTxt (Wind Direction Abreviation)
+#### windGustTxt (Wind Gust)
