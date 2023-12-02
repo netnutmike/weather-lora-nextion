@@ -30,6 +30,120 @@ void setup() {
   rf95.setTxPower(23, false);
 }
 
+void extractUpdate(char[] buffer)
+{
+  // extract the update from the buffer
+  // update the display
+
+  // sendText = "U," + str(self.temperature) + "," + str(self.humidity) + "," + str(self.pressure) + "," + str(self.windGust) + "," + str(self.windAvg) + "," + str(self.precipDayTotal) + "," + str(self.rainMinute) + "," + str(self.precipType) + "," + str(self.lightningCount) + "," + str(self.lightningAvgDistance) + "," + str(self.UV) + "," + str(self.solarRadiation)
+
+  byte index = 0;
+   ptr = strtok(array, ",");  // delimiter
+   while (ptr != NULL)
+   {
+      strings[index] = ptr;
+      index++;
+      ptr = strtok(NULL, ",");
+   }
+   //Serial.println(index);
+   // print all the parts
+   Serial.println("The Pieces separated by strtok()");
+   for (int n = 0; n < index; n++)
+   {
+      Serial.print(n);
+      Serial.print("  ");
+      Serial.println(strings[n]);
+   }
+   //Those values are Sunlight,Humidity,Temperature,Pressure,Dewpoint.
+  // use the atoi() and atof() functions to convert ASCII strings to numbers.
+   Sunlight = atoi(strings[0]); //http://www.cplusplus.com/reference/cstdlib/atoi/?kw=atoi
+   Humidity = atoi(strings[1]);
+   Temperature = atoi(strings[2]);
+   Pressure = atof(strings[3]); //http://www.cplusplus.com/reference/cstdlib/atof/?kw=atof
+   Dewpoint = atoi(strings[4]);
+}
+
+void extractLightning(char[] buffer)
+{
+
+    // sendText = "L," + str(self.lightninLastStrikeDistance)
+
+  byte index = 0;
+   ptr = strtok(array, ",");  // delimiter
+   while (ptr != NULL)
+   {
+      strings[index] = ptr;
+      index++;
+      ptr = strtok(NULL, ",");
+   }
+   //Serial.println(index);
+   // print all the parts
+   Serial.println("The Pieces separated by strtok()");
+   for (int n = 0; n < index; n++)
+   {
+      Serial.print(n);
+      Serial.print("  ");
+      Serial.println(strings[n]);
+   }
+   //Those values are Sunlight,Humidity,Temperature,Pressure,Dewpoint.
+  // use the atoi() and atof() functions to convert ASCII strings to numbers.
+   Sunlight = atoi(strings[0]); //http://www.cplusplus.com/reference/cstdlib/atoi/?kw=atoi
+   Humidity = atoi(strings[1]);
+   Temperature = atoi(strings[2]);
+   Pressure = atof(strings[3]); //http://www.cplusplus.com/reference/cstdlib/atof/?kw=atof
+   Dewpoint = atoi(strings[4]);
+}
+
+void extractWind(char[] buffer)
+{
+
+  // sendText = "W," + str(self.windDirection) + "," + str(self.windSpeed)
+
+  byte index = 0;
+   ptr = strtok(array, ",");  // delimiter
+   while (ptr != NULL)
+   {
+      strings[index] = ptr;
+      index++;
+      ptr = strtok(NULL, ",");
+   }
+   //Serial.println(index);
+   // print all the parts
+   Serial.println("The Pieces separated by strtok()");
+   for (int n = 0; n < index; n++)
+   {
+      Serial.print(n);
+      Serial.print("  ");
+      Serial.println(strings[n]);
+   }
+   //Those values are Sunlight,Humidity,Temperature,Pressure,Dewpoint.
+  // use the atoi() and atof() functions to convert ASCII strings to numbers.
+   Sunlight = atoi(strings[0]); //http://www.cplusplus.com/reference/cstdlib/atoi/?kw=atoi
+   Humidity = atoi(strings[1]);
+   Temperature = atoi(strings[2]);
+   Pressure = atof(strings[3]); //http://www.cplusplus.com/reference/cstdlib/atof/?kw=atof
+   Dewpoint = atoi(strings[4]);
+}
+
+void handleInput(char[] buffer)
+{
+  if (buffer[0] == 'W')
+  {
+    extractWind(buffer);
+
+  }
+  else if (buffer[0] == 'L')
+  {
+    extractLightning(buffer);
+  }
+  else if (buffer[0] == 'U')
+  {
+    extractUpdate(buffer);
+    // sendText = "U," + str(self.temperature) + "," + str(self.humidity) + "," + str(self.pressure) + "," + str(self.windGust) + "," + str(self.windAvg) + "," + str(self.precipDayTotal) + "," + str(self.rainMinute) + "," + str(self.precipType) + "," + str(self.lightningCount) + "," + str(self.lightningAvgDistance) + "," + str(self.UV) + "," + str(self.solarRadiation)
+  }
+  
+}
+
 void loop() {
 
   WeatherNextion weatherDisplay;
@@ -41,13 +155,11 @@ void loop() {
       uint8_t len = sizeof(buf);    
       if (rf95.recv(buf, &len)) 
         {      
-          digitalWrite(LED_BUILTIN, HIGH);      
-          RH_RF95::printBuffer("Received: ", buf, len);      
-          Serial.print("Got: ");      
-          Serial.println((char*)buf);       
-          Serial.print("RSSI: ");      
-          Serial.println(rf95.lastRssi(), DEC); 
-          digitalWrite(LED_BUILTIN, LOW);    }
+          digitalWrite(LED_BUILTIN, HIGH);   
+          handleInput((char*)buf)           
+          digitalWrite(LED_BUILTIN, LOW);    
+        }
+    }
 
   /*for (int i=1; i<=360; i++)
   {
