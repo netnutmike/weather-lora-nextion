@@ -1,6 +1,5 @@
 #include <Arduino.h>
 #include <WeatherNextion.h>
-#include <SPI.h> 
 #include <RH_RF95.h>
 
 #define RFM95_CS    8
@@ -35,94 +34,79 @@ void extractUpdate(char[] buffer)
   // extract the update from the buffer
   // update the display
 
-  // sendText = "U," + str(self.temperature) + "," + str(self.humidity) + "," + str(self.pressure) + "," + str(self.windGust) + "," + str(self.windAvg) + "," + str(self.precipDayTotal) + "," + str(self.rainMinute) + "," + str(self.precipType) + "," + str(self.lightningCount) + "," + str(self.lightningAvgDistance) + "," + str(self.UV) + "," + str(self.solarRadiation)
+  // 0 - "U," 
+  // 1 - str(self.temperature) + "," + 
+  // 2 - str(self.humidity) + "," + 
+  // 3 - str(self.pressure) + "," + 
+  // 4 - str(self.windGust) + "," + 
+  // 5 - str(self.windAvg) + "," + 
+  // 6 - str(self.precipDayTotal) + "," + 
+  // 7 - str(self.rainMinute) + "," + 
+  // 8 - str(self.precipType) + "," + 
+  // 9 - str(self.lightningCount) + "," + 
+  // 10 - str(self.lightningAvgDistance) + "," + 
+  // 11 - str(self.UV) + "," + 
+  // 12 - str(self.solarRadiation)
 
   byte index = 0;
-   ptr = strtok(array, ",");  // delimiter
-   while (ptr != NULL)
-   {
-      strings[index] = ptr;
-      index++;
-      ptr = strtok(NULL, ",");
-   }
-   //Serial.println(index);
-   // print all the parts
-   Serial.println("The Pieces separated by strtok()");
-   for (int n = 0; n < index; n++)
-   {
-      Serial.print(n);
-      Serial.print("  ");
-      Serial.println(strings[n]);
-   }
-   //Those values are Sunlight,Humidity,Temperature,Pressure,Dewpoint.
-  // use the atoi() and atof() functions to convert ASCII strings to numbers.
-   Sunlight = atoi(strings[0]); //http://www.cplusplus.com/reference/cstdlib/atoi/?kw=atoi
-   Humidity = atoi(strings[1]);
-   Temperature = atoi(strings[2]);
-   Pressure = atof(strings[3]); //http://www.cplusplus.com/reference/cstdlib/atof/?kw=atof
-   Dewpoint = atoi(strings[4]);
+  ptr = strtok(buffer, ",");  // delimiter
+  while (ptr != NULL)
+  {
+    strings[index] = ptr;
+    index++;
+    ptr = strtok(NULL, ",");
+  }
+
+  weatherDisplay.setTemp(atof(strings[1]));
+  weatherDisplay.setHumidity(atof(strings[2]));
+  weatherDisplay.setPressure(atof(strings[3]));
+  weatherDisplay.setWindGust(atof(strings[4]));
+  weatherDisplay.setRainToday(atof(strings[6]));
+  weatherDisplay.setRainRate(atof(strings[7]));
+  weatherDisplay.setUV(atof(strings[11]));
+
+  weatherDisplay.updateDisplay();
 }
 
 void extractLightning(char[] buffer)
 {
 
-    // sendText = "L," + str(self.lightninLastStrikeDistance)
+    // 0 - "L," 
+    // 1 - str(self.lightninLastStrikeDistance)
 
   byte index = 0;
-   ptr = strtok(array, ",");  // delimiter
-   while (ptr != NULL)
-   {
-      strings[index] = ptr;
-      index++;
-      ptr = strtok(NULL, ",");
-   }
-   //Serial.println(index);
-   // print all the parts
-   Serial.println("The Pieces separated by strtok()");
-   for (int n = 0; n < index; n++)
-   {
-      Serial.print(n);
-      Serial.print("  ");
-      Serial.println(strings[n]);
-   }
-   //Those values are Sunlight,Humidity,Temperature,Pressure,Dewpoint.
-  // use the atoi() and atof() functions to convert ASCII strings to numbers.
-   Sunlight = atoi(strings[0]); //http://www.cplusplus.com/reference/cstdlib/atoi/?kw=atoi
-   Humidity = atoi(strings[1]);
-   Temperature = atoi(strings[2]);
-   Pressure = atof(strings[3]); //http://www.cplusplus.com/reference/cstdlib/atof/?kw=atof
-   Dewpoint = atoi(strings[4]);
+  ptr = strtok(buffer, ",");  // delimiter
+  while (ptr != NULL)
+  {
+    strings[index] = ptr;
+    index++;
+    ptr = strtok(NULL, ",");
+  }
+  
+  weatherDisplay.setLightningDistance(atoi(strings[1]));
+  weatherDisplay.updateDisplay();
 }
 
 void extractWind(char[] buffer)
 {
 
-  // sendText = "W," + str(self.windDirection) + "," + str(self.windSpeed)
+  // 0 - "W,"
+  // 1 - str(self.windDirection) + "," + 
+  // 2 - str(self.windSpeed)
 
   byte index = 0;
-   ptr = strtok(array, ",");  // delimiter
-   while (ptr != NULL)
-   {
-      strings[index] = ptr;
-      index++;
-      ptr = strtok(NULL, ",");
-   }
-   //Serial.println(index);
-   // print all the parts
-   Serial.println("The Pieces separated by strtok()");
-   for (int n = 0; n < index; n++)
-   {
-      Serial.print(n);
-      Serial.print("  ");
-      Serial.println(strings[n]);
-   }
-   //Those values are Sunlight,Humidity,Temperature,Pressure,Dewpoint.
-  // use the atoi() and atof() functions to convert ASCII strings to numbers.
-   Sunlight = atoi(strings[0]); //http://www.cplusplus.com/reference/cstdlib/atoi/?kw=atoi
-   Humidity = atoi(strings[1]);
-   Temperature = atoi(strings[2]);
-   Pressure = atof(strings[3]); //http://www.cplusplus.com/reference/cstdlib/atof/?kw=atof
-   Dewpoint = atoi(strings[4]);
+  ptr = strtok(buffer, ",");  // delimiter
+  while (ptr != NULL)
+  {
+    strings[index] = ptr;
+    index++;
+    ptr = strtok(NULL, ",");
+  }
+
+  weatherDisplay.setWindDirection(atoi(strings[1]));
+  weatherDisplay.setWindSpeed(atof(strings[2]));
+  weatherDisplay.updateDisplay();
+
 }
 
 void handleInput(char[] buffer)
@@ -156,29 +140,8 @@ void loop() {
       if (rf95.recv(buf, &len)) 
         {      
           digitalWrite(LED_BUILTIN, HIGH);   
-          handleInput((char*)buf)           
+          handleInput((char*)buf);         
           digitalWrite(LED_BUILTIN, LOW);    
         }
-    }
-
-  /*for (int i=1; i<=360; i++)
-  {
-    weatherDisplay.setWindDirection(i);
-    weatherDisplay.setWindSpeed(i);
-    weatherDisplay.setWindGust(i);
-    weatherDisplay.setPressure(i);
-    weatherDisplay.setTemp(i);
-    weatherDisplay.setHumidity(i);
-    weatherDisplay.setRainRate(i);
-    weatherDisplay.setRainToday(i);
-    weatherDisplay.setRainYesterday(i);
-    weatherDisplay.setUV(i);
-    weatherDisplay.setLightningDistance(i);
-    weatherDisplay.setLightningTime(i);
-    //weatherDisplay.setLightningAverage(i);
-
-    weatherDisplay.updateDisplay();
-   
-    delay(500);    
-  }           */      
+    }     
 }

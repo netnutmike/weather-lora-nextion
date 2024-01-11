@@ -12,5 +12,9 @@
 			"path": "Lora to Nextion Weather"
 		}
 	],
-	"settings": {}
+	"settings": {
+		"files.associations": {
+			"cstddef": "cpp"
+		}
+	}
 }
