@@ -1,4 +1,4 @@
-#include <Arduino.h>
+#include <heltec.h>
 #include <WeatherNextion.h>
 #include <RH_RF95.h>
 

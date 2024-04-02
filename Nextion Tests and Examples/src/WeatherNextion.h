@@ -1,6 +1,5 @@
 #ifndef WeatherNextion_h
 #define WeatherNextion_h
-#include "Arduino.h" 
 
 #define CONDITIONS_SUNNY 0
 #define CONDITIONS_PARTLY_SUNNY 7

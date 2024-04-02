@@ -10,6 +10,10 @@
 		{
 			"name": "Lora to Nextion Weather",
 			"path": "Lora to Nextion Weather"
+		},
+		{
+			"name": "Wifi to LoRa",
+			"path": "Wifi to LoRa"
 		}
 	],
 	"settings": {
